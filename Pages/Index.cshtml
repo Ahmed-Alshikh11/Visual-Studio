@@ -1,0 +1,173 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Ahmed AlSheikh Portfolio";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    
+    <style>
+            /* Upscale Golden-Ratio Neo-Classical Theme */
+            body {
+                background-color: #0b0f19;
+                color: #f3f4f6;
+                font-family: 'Optima', 'Didot', 'Georgia', serif;
+                min-height: 100vh;
+                margin: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow-x: hidden;
+            }
+
+            .gallery-vault {
+                width: 90%;
+                max-width: 950px;
+                padding: 50px;
+                background: linear-gradient(180deg, #111827 0%, #070a10 100%);
+                border: 1px solid #1f2937;
+                border-top: 4px solid #d4af37; /* Luxury Gold Accent Bar */
+                box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
+                text-align: center;
+            }
+
+            /* Kinetic Typography Target Header */
+            .kinetic-title {
+                font-size: 2.8rem;
+                font-weight: 300;
+                letter-spacing: 8px;
+                margin: 0 auto 10px auto;
+                text-transform: uppercase;
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                min-height: 80px;
+            }
+
+            .char-node {
+                display: inline-block;
+                transform-origin: center bottom;
+                white-space: pre;
+                transition: color 0.1s ease;
+            }
+
+            .separator-line {
+                width: 60px;
+                height: 1px;
+                background: #d4af37;
+                margin: 20px auto 40px auto;
+                opacity: 0.6;
+            }
+
+            /* Cinematic Wide-Screen Frame */
+            .cinema-frame {
+                position: relative;
+                padding: 15px;
+                background: #030712;
+                border: 1px solid #374151;
+                box-shadow: inset 0 0 20px rgba(0,0,0,1);
+            }
+
+            .video-container {
+                position: relative;
+                padding-bottom: 40%; /* Cinematic 21:9 Ultra-widescreen layout */
+                height: 0;
+                overflow: hidden;
+            }
+
+                .video-container iframe {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    filter: sepia(15%) contrast(105%) brightness(95%);
+                }
+
+            .curator-tag {
+                font-size: 0.75rem;
+                color: #9ca3af;
+                letter-spacing: 4px;
+                text-transform: uppercase;
+                margin-top: 40px;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="gallery-vault">
+        <h1 class="kinetic-title" id="kinetic-text">AHMED ALSHEIKH</h1>
+        
+        <div class="separator-line"></div>
+
+        <div class="cinema-frame">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/C6_S7k2V6f0"
+                        title="Ambient Epic Orchestral Piece"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+        <div class="curator-tag">EXHIBIT DESIGNED VIA ASP.NET CORE</div>
+    </div>
+
+    <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const textContainer = document.getElementById("kinetic-text");
+                const stringRaw = textContainer.innerText.trim();
+                textContainer.innerHTML = "";
+
+                // Parse text into individual dynamic letter nodes
+                const nodeElements = [];
+                for (let i = 0; i < stringRaw.length; i++) {
+                    const span = document.createElement("span");
+                    span.textContent = stringRaw[i];
+                    span.className = "char-node";
+                    textContainer.appendChild(span);
+                    nodeElements.push(span);
+                }
+
+                let runtimeClock = 0;
+
+                function typographyPhysicsLoop() {
+                    runtimeClock += 0.025;
+
+                    nodeElements.forEach((node, position) => {
+                        // Introduce mechanical math variance per letter
+                        const localPhase = runtimeClock + (position * 0.35);
+                    
+                        // Waveforms: Primary vertical scaling, horizontal contraction, and skew matrices
+                        const dynamicScaleY = 1 + Math.sin(localPhase) * 0.25;
+                        const dynamicScaleX = 1 + Math.cos(localPhase * 1.5) * 0.15;
+                        const dynamicSkew = Math.sin(localPhase * 0.8) * 12;
+                        const verticalLift = Math.cos(localPhase * 2) * 8;
+
+                        // Compute interpolated color trajectory (Slate Charcoal to Polished Champagne Gold)
+                        const goldInterpolation = (Math.sin(localPhase) + 1) / 2;
+                        const r = Math.floor(156 + (212 - 156) * goldInterpolation);
+                        const g = Math.floor(163 + (175 - 163) * goldInterpolation);
+                        const b = Math.floor(175 + (55 - 175) * goldInterpolation);
+
+                        // Map spatial transforms and lighting directly onto the DOM element
+                        node.style.transform = `translateY(${verticalLift}px) scale(${dynamicScaleX}, ${dynamicScaleY}) skewX(${dynamicSkew}deg)`;
+                        node.style.color = `rgb(${r}, ${g}, ${b})`;
+                        node.style.textShadow = `0 ${Math.abs(verticalLift)}px 15px rgba(${r}, ${g}, ${b}, 0.3)`;
+                    });
+
+                    // Re-invoke system loop via window painted frame callback
+                    requestAnimationFrame(typographyPhysicsLoop);
+                }
+
+                typographyPhysicsLoop();
+            });
+    </script>
+</body>
+</html>
